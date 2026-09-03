@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jams-fitness-centre.vercel.app/sitemap.xml
