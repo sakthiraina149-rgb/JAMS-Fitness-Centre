@@ -51,6 +51,53 @@
     .about { background:var(--ink); color:#fff; }.about-grid { display:grid; grid-template-columns:.7fr 1.3fr; align-items:center; gap:55px; }.about-logo { width:220px; max-width:100%; background:#000; }.about p { color:#d3ddd6; font-size:17px; line-height:1.65; }.contact-detail { display:inline-block; margin-top:10px; color:var(--lime); font:700 30px Oswald,sans-serif; text-decoration:none; letter-spacing:1px; }
     @media (max-width:760px) { .about-grid { grid-template-columns:1fr; gap:28px; } }
   </style>
+     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthClub",
+  "name": "JAMS Fitness Centre",
+  "url": "https://jams-fitness-centre.vercel.app/",
+  "telephone": "+917305712670",
+  "email": "jamsfitnesscentre@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "North Pet",
+    "addressLocality": "Sathyamangalam",
+    "postalCode": "638401",
+    "addressCountry": "IN"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "05:00",
+      "closes": "11:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "17:00",
+      "closes": "23:00"
+    }
+  ]
+}
+</script>
 </head>
 <body>
   <header class="hero" id="home"><div class="wrap"><nav><div class="brand"><img src="jams-logo.png" alt="JAMS Fitness Centre"></div><ul><li><a href="#about">About</a></li><li><a href="#equipment">Equipment</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#programs">Programs</a></li><li><a href="#trainers">Trainers</a></li><li><a href="#schedule">Schedule</a></li><li><a href="products.html">Shop</a></li><li><a href="blog.html">Blog</a></li><li><a href="#plans">Membership</a></li></ul><div><button class="btn cart-button" type="button" id="cart-toggle">Cart (<span id="nav-cart-count">0</span>)</button> <a class="btn" href="#contact">Start free</a></div></nav>
