@@ -247,7 +247,9 @@
     enterButton.addEventListener("click", function () {
         music.volume = 0.4;
 
-        music.play();
+      music.play().catch(error => {
+    console.log("Music could not start:", error);
+});
 
         enterScreen.style.display = "none";
     });
