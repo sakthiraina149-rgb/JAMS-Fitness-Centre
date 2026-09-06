@@ -190,18 +190,67 @@
 >
   💬 WhatsApp
 </a>
-<audio id="bgMusic" autoplay loop>
+<div id="enterScreen">
+    <div class="enter-content">
+        <h1>JAMS FITNESS CENTRE</h1>
+        <p>Train. Transform. Achieve.</p>
+
+        <button id="enterButton">ENTER</button>
+    </div>
+</div>
+
+<audio id="bgMusic" loop>
     <source src="Music.mp3" type="audio/mpeg">
 </audio>
 
+<style>
+    #enterScreen {
+        position: fixed;
+        inset: 0;
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        text-align: center;
+    }
+
+    .enter-content {
+        color: white;
+    }
+
+    .enter-content h1 {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .enter-content p {
+        margin-bottom: 30px;
+        font-size: 18px;
+    }
+
+    #enterButton {
+        padding: 15px 45px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+    }
+</style>
+
 <script>
+    const enterButton = document.getElementById("enterButton");
+    const enterScreen = document.getElementById("enterScreen");
     const music = document.getElementById("bgMusic");
 
-    music.volume = 0.4;
+    enterButton.addEventListener("click", function () {
+        music.volume = 0.4;
 
-    document.addEventListener("click", function () {
         music.play();
-    }, { once: true });
+
+        enterScreen.style.display = "none";
+    });
 </script>
 </body>
 </html>
