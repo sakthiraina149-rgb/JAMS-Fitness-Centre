@@ -192,17 +192,18 @@
 </a>
 
 
-<audio id="bgMusic" autoplay>
-    <source src="Music.mp3" type="audio/mpeg">
+<audio id="bgMusic" autoplay preload="auto">
+    <source src="./Music.mp3" type="audio/mpeg">
 </audio>
-     <script>
-    const music = document.getElementById("bgMusic");
 
-    music.volume = 0.4;
+<script>
+const music = document.getElementById("bgMusic");
 
-    music.play().catch(error => {
-        console.log("Autoplay was blocked:", error);
-    });
+music.volume = 0.4;
+
+music.play().catch(() => {
+    console.log("Browser blocked autoplay.");
+});
 </script>
 
 </body>
