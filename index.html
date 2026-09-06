@@ -190,68 +190,18 @@
 >
   💬 WhatsApp
 </a>
-<div id="enterScreen">
-    <div class="enter-content">
-        <h1>JAMS FITNESS CENTRE</h1>
-        <p>Train. Transform. Achieve.</p>
 
-        <button id="enterButton">ENTER</button>
-    </div>
-</div>
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" autoplay>
     <source src="Music.mp3" type="audio/mpeg">
 </audio>
-
-<style>
-    #enterScreen {
-        position: fixed;
-        inset: 0;
-        background: #111;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 99999;
-        text-align: center;
-    }
-
-    .enter-content {
-        color: white;
-    }
-
-    .enter-content h1 {
-        font-size: 40px;
-        margin-bottom: 10px;
-    }
-
-    .enter-content p {
-        margin-bottom: 30px;
-        font-size: 18px;
-    }
-
-    #enterButton {
-        padding: 15px 45px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        border: none;
-        border-radius: 8px;
-    }
-</style>
-
-<script>
-    const enterButton = document.getElementById("enterButton");
-    const enterScreen = document.getElementById("enterScreen");
+     <script>
     const music = document.getElementById("bgMusic");
 
-    enterButton.addEventListener("click", function () {
-        music.volume = 0.4;
+    music.volume = 0.4;
 
-      music.play().catch(error => {
-    console.log("Music could not start:", error);
-});
-
-        enterScreen.style.display = "none";
+    music.play().catch(error => {
+        console.log("Autoplay was blocked:", error);
     });
 </script>
 </body>
