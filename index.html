@@ -190,9 +190,7 @@
 >
   💬 WhatsApp
 </a>
-
-
-<audio id="bgMusic" autoplay preload="auto">
+<audio id="bgMusic" preload="auto">
     <source src="./Music.mp3" type="audio/mpeg">
 </audio>
 
@@ -201,9 +199,15 @@ const music = document.getElementById("bgMusic");
 
 music.volume = 0.4;
 
-music.play().catch(() => {
-    console.log("Browser blocked autoplay.");
-});
+function startMusic() {
+    music.play().catch(error => {
+        console.log("Music could not play:", error);
+    });
+
+    document.removeEventListener("click", startMusic);
+}
+
+document.addEventListener("click", startMusic);
 </script>
 
 </body>
