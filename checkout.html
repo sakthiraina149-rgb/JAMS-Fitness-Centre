@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | JAMS Fitness Centre</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef0e8;
+            color: #17221f;
+        }
+
+        .header {
+            background: #14221e;
+            color: white;
+            padding: 22px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .header p {
+            margin: 8px 0 0;
+            color: #d5f457;
+        }
+
+        .checkout-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .box {
+            background: white;
+            padding: 28px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+        }
+
+        .box h2 {
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        .order-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .item-details {
+            margin-top: 6px;
+            color: #666;
+        }
+
+        .subtotal {
+            margin-top: 6px;
+            font-weight: 700;
+        }
+
+        .total {
+            border-top: 2px solid #17221f;
+            margin-top: 15px;
+            padding-top: 18px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .payment {
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 280px;
+            max-width: 100%;
+            margin: 15px auto;
+            display: block;
+        }
+
+        .upi-id {
+            background: #eef0e8;
+            padding: 12px;
+            font-weight: 700;
+            margin: 15px 0;
+            word-break: break-all;
+        }
+
+        .payment-note {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .btn {
+            border: none;
+            padding: 15px 22px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            background: #d5f457;
+            color: #17221f;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            color: #17221f;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .success {
+            display: none;
+            background: #d5f457;
+            padding: 20px;
+            margin-top: 20px;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 700px) {
+
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-container {
+                margin: 20px auto;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <h1>JAMS FITNESS</h1>
+
+        <p>Secure Checkout</p>
+
+    </header>
+
+
+    <main class="checkout-container">
+
+        <div id="checkout-content">
+
+            <div class="checkout-grid">
+
+
+                <!-- ORDER SUMMARY -->
+
+                <section class="box">
+
+                    <h2>Your Order</h2>
+
+                    <div id="order-items"></div>
+
+                    <div class="total" id="order-total">
+                        Total: ₹0
+                    </div>
+
+                </section>
+
+
+                <!-- PAYMENT -->
+
+                <section class="box payment">
+
+                    <h2>Pay with UPI</h2>
+
+                    <p class="payment-note">
+                        Scan the QR code using Google Pay,
+                        PhonePe, Paytm or another UPI app.
+                    </p>
+
+                    <img
+                        src="jams-payment-qr.jpeg"
+                        alt="JAMS Fitness UPI Payment QR Code"
+                        class="qr-code"
+                    >
+
+                    <p>
+                        <strong>UPI ID</strong>
+                    </p>
+
+                    <div class="upi-id">
+                        sakthimurthi149-2@okaxis
+                    </div>
+
+                    <p class="payment-note">
+                        Please pay the exact order amount shown
+                        on the left.
+                    </p>
+
+                    <button
+                        class="btn"
+                        id="payment-completed"
+                        type="button">
+                        Payment Completed ✓
+                    </button>
+
+                    <div
+                        class="success"
+                        id="success-message">
+
+                        Payment confirmation received.<br><br>
+
+                        Thank you for ordering from
+                        <strong>JAMS Fitness Centre!</strong>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="empty-cart"
+            class="box empty"
+            style="display:none;">
+
+            <h2>Your cart is empty</h2>
+
+            <p>
+                Please add a product before proceeding
+                to checkout.
+            </p>
+
+            <a
+                href="index.html"
+                class="btn"
+                style="display:inline-block;text-decoration:none;">
+                ← Continue Shopping
+            </a>
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="back">
+            ← Back to JAMS Fitness
+        </a>
+
+    </main>
+
+
+    <script>
+
+        /* =========================
+           LOAD CART
+           ========================= */
+
+        let cartItems =
+            JSON.parse(localStorage.getItem("jamsCart")) || [];
+
+
+        function formatPrice(price) {
+
+            return "₹" +
+                Number(price).toLocaleString("en-IN");
+
+        }
+
+
+        function getCartTotal() {
+
+            return cartItems.reduce(
+                (total, item) =>
+                    total +
+                    (item.price * item.quantity),
+                0
+            );
+
+        }
+
+
+        /* =========================
+           DISPLAY ORDER
+           ========================= */
+
+        function displayOrder() {
+
+            const orderItems =
+                document.getElementById("order-items");
+
+            const checkoutContent =
+                document.getElementById("checkout-content");
+
+            const emptyCart =
+                document.getElementById("empty-cart");
+
+
+            if (cartItems.length === 0) {
+
+                checkoutContent.style.display = "none";
+                emptyCart.style.display = "block";
+
+                return;
+
+            }
+
+
+            orderItems.innerHTML =
+                cartItems.map(item => `
+
+                    <div class="order-item">
+
+                        <div class="item-name">
+                            ${item.name}
+                        </div>
+
+                        <div class="item-details">
+                            Price:
+                            ${formatPrice(item.price)}
+                            ×
+                            ${item.quantity}
+                        </div>
+
+                        <div class="subtotal">
+                            Subtotal:
+                            ${formatPrice(
+                                item.price * item.quantity
+                            )}
+                        </div>
+
+                    </div>
+
+                `).join("");
+
+
+            document.getElementById("order-total")
+                .textContent =
+                "Total: " +
+                formatPrice(getCartTotal());
+
+        }
+
+
+        /* =========================
+           PAYMENT BUTTON
+           ========================= */
+
+        document
+            .getElementById("payment-completed")
+            .addEventListener("click", () => {
+
+                if (cartItems.length === 0) {
+
+                    return;
+
+                }
+
+
+                document
+                    .getElementById("success-message")
+                    .style.display = "block";
+
+            });
+
+
+        displayOrder();
+
+    </script>
+
+</body>
+
+</html>
