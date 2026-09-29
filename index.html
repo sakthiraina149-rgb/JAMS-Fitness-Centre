@@ -194,21 +194,7 @@
     <source src="./Music.mp3" type="audio/mpeg">
 </audio>
 
-<script>
-const music = document.getElementById("bgMusic");
 
-music.volume = 0.4;
-
-function startMusic() {
-    music.play().catch(error => {
-        console.log("Music could not play:", error);
-    });
-
-    document.removeEventListener("click", startMusic);
-}
-
-document.addEventListener("click", startMusic);
-</script>
 
 </body>
 </html>
