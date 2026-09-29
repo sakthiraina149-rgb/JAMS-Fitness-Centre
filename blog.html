@@ -1,45 +1,828 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fitness & Gym Tips | JAMS Fitness Centre Sathyamangalam</title>
-  <meta name="description" content="Read fitness, workout and gym tips from JAMS Fitness Centre in Sathyamangalam. Learn about exercise, strength training and healthy fitness habits.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--ink:#16231f;--lime:#d5f457;--cream:#f6f5ef;--orange:#fb6435;--muted:#61706a}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif}.wrap{max-width:1060px;margin:auto;padding:0 24px}nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}.logo{width:95px;height:62px;object-fit:contain}.btn{display:inline-block;border:0;padding:14px 20px;background:var(--lime);color:var(--ink);text-decoration:none;font-weight:700}.hero{background:var(--ink);color:#fff;padding:58px 0}.eyebrow{color:var(--lime);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase}h1,h2{font-family:Oswald,sans-serif;text-transform:uppercase;line-height:1;margin:0}h1{font-size:64px}.post{background:#fff;margin:52px 0;padding:35px;display:grid;grid-template-columns:360px 1fr;gap:38px}.video{position:relative;width:100%;padding-top:177.78%;background:#000}.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.tag{color:var(--orange);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px}.post h2{font-size:42px;margin:10px 0 18px}.post p{line-height:1.65;color:var(--muted)}.tips{padding-left:20px;line-height:2;color:var(--ink)}footer{background:var(--ink);color:#fff;padding:22px 0;font-size:13px}@media(max-width:760px){.post{grid-template-columns:1fr;padding:24px}.video{max-width:360px;margin:auto}h1{font-size:50px}}
-  </style>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fitness Blog | JAMS Fitness Centre</title>
+
+    <meta name="description"
+        content="Read fitness tips, workout advice and healthy lifestyle information from JAMS Fitness Centre.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        :root {
+            --ink: #16231f;
+            --lime: #d5f457;
+            --cream: #f6f5ef;
+            --orange: #fb6435;
+            --muted: #61706a;
+            --white: #ffffff;
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+
+        .wrap {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 25px;
+        }
+
+
+        /* NAVIGATION */
+
+        header {
+            background: var(--white);
+        }
+
+
+        nav {
+            min-height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+
+        .logo {
+            width: 95px;
+            height: 65px;
+            object-fit: contain;
+        }
+
+
+        .back-btn {
+            display: inline-block;
+            background: var(--lime);
+            color: var(--ink);
+            padding: 12px 22px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+        }
+
+
+        /* HERO */
+
+        .hero {
+            background: var(--ink);
+            color: var(--white);
+            padding: 75px 0;
+        }
+
+
+        .eyebrow {
+            color: var(--lime);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+
+        h1 {
+            font-size: 62px;
+            line-height: 1.05;
+            max-width: 900px;
+        }
+
+
+        h1 span {
+            color: var(--lime);
+        }
+
+
+        /* MAIN */
+
+        main {
+            padding: 60px 0;
+        }
+
+
+        .post {
+            background: var(--white);
+            padding: 45px;
+            border-radius: 5px;
+        }
+
+
+        .tag {
+            color: var(--orange);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+
+        .post h2 {
+            font-size: 40px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+
+        .post h3 {
+            font-size: 28px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+
+        .post p {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+
+        /* FITNESS TIPS */
+
+        .tips {
+            background: var(--cream);
+            padding: 25px 30px 25px 50px;
+            margin: 25px 0;
+            border-left: 5px solid var(--lime);
+        }
+
+
+        .tips li {
+            color: var(--ink);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+
+        .tips li:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* VIDEO SECTION */
+
+        .video-section {
+            margin-top: 45px;
+        }
+
+
+        .video-intro {
+            margin-bottom: 25px;
+        }
+
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+
+        .video-card {
+            background: var(--cream);
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+
+        .video {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+            overflow: hidden;
+        }
+
+
+        .video iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+
+        .video-card h4 {
+            font-size: 20px;
+            line-height: 1.3;
+            margin-top: 15px;
+        }
+
+
+        /* JAMS SECTION */
+
+        .jams-section {
+            margin-top: 45px;
+            background: var(--ink);
+            color: var(--white);
+            padding: 35px;
+        }
+
+
+        .jams-section h3 {
+            color: var(--lime);
+            margin-top: 0;
+        }
+
+
+        .jams-section p {
+            color: #dfe6e2;
+        }
+
+
+        /* RELATED LINKS */
+
+        .related {
+            margin-top: 40px;
+        }
+
+
+        .related h3 {
+            margin-top: 0;
+        }
+
+
+        .related-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+
+        .related-links a {
+            display: inline-block;
+            background: var(--lime);
+            color: var(--ink);
+            padding: 12px 18px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+
+        .related-links a:hover {
+            transform: translateY(-2px);
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: var(--ink);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+
+        footer p {
+            margin: 0;
+            color: #dfe6e2;
+            font-size: 14px;
+        }
+
+
+        /* TABLET */
+
+        @media (max-width: 900px) {
+
+            h1 {
+                font-size: 50px;
+            }
+
+
+            .video-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .wrap {
+                padding: 0 18px;
+            }
+
+
+            nav {
+                min-height: 75px;
+            }
+
+
+            .logo {
+                width: 80px;
+                height: 55px;
+            }
+
+
+            .back-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+
+            .hero {
+                padding: 55px 0;
+            }
+
+
+            h1 {
+                font-size: 42px;
+            }
+
+
+            main {
+                padding: 35px 0;
+            }
+
+
+            .post {
+                padding: 25px 20px;
+            }
+
+
+            .post h2 {
+                font-size: 32px;
+            }
+
+
+            .post h3 {
+                font-size: 25px;
+            }
+
+
+            .post p {
+                font-size: 16px;
+            }
+
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .jams-section {
+                padding: 25px 20px;
+            }
+
+
+            .related-links {
+                flex-direction: column;
+            }
+
+
+            .related-links a {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
-  <header class="wrap"><nav><a href="index.html"><img class="logo" src="jams-logo.png" alt="JAMS Fitness Centre"></a><a class="btn" href="index.html">← Back to JAMS</a></nav></header>
-  <section class="hero"><div class="wrap"><div class="eyebrow">JAMS fitness blog</div><h1>Fitness & Gym Tips in Sathyamangalam<br><em>for a Stronger You.</em></h1></div></section>
-  <h2>Simple Fitness Tips for a Healthier Lifestyle</h2>
 
-<p>Building a healthy lifestyle starts with simple and consistent fitness habits. Regular exercise can help improve strength, stamina, flexibility and overall well-being.</p>
 
-<p>Whether you are a beginner or an experienced workout enthusiast, following a structured exercise routine can help you stay active and achieve your fitness goals. Strength training, cardio workouts and proper recovery are important parts of a balanced fitness routine.</p>
+    <!-- HEADER -->
 
-<h2>Fitness Training at JAMS Fitness Centre</h2>
+    <header>
 
-<p>JAMS Fitness Centre in Sathyamangalam provides a supportive environment for people who want to improve their fitness and build healthier habits. Consistent training and proper guidance can make your workouts more effective.</p>
-<div class="related-links">
-<p><strong>Explore JAMS Fitness Centre:</strong></p>
-<a href="index.html">Home</a> |
-<a href="fitness-centre.html">Fitness Centre</a> |
-<a href="products.html">Gym & Fitness Products</a>
-</div>
-<div class="video">
-<iframe src="https://www.youtube.com/embed/pTpdzA-WQ8" title="3 quick gym tips for anyone" allowfullscreen></iframe>
-</div>
+        <div class="wrap">
 
-</article>
-</main>
+            <nav>
 
-<footer>
-<div class="wrap">© 2026 JAMS Fitness Centre · Call 7305712670</div>
-</footer>
+                <a href="index.html">
+
+                    <img
+                        class="logo"
+                        src="jams-logo.png"
+                        alt="JAMS Fitness Centre">
+
+                </a>
+
+
+                <a
+                    href="index.html"
+                    class="back-btn">
+
+                    ← Back to JAMS
+
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="wrap">
+
+            <div class="eyebrow">
+
+                JAMS FITNESS BLOG
+
+            </div>
+
+
+            <h1>
+
+                Fitness Tips &
+
+                <br>
+
+                <span>Workout Knowledge</span>
+
+            </h1>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MAIN BLOG -->
+
+    <main>
+
+        <div class="wrap">
+
+            <article class="post">
+
+
+                <!-- INTRODUCTION -->
+
+                <div class="tag">
+
+                    FITNESS • WORKOUT • HEALTH
+
+                </div>
+
+
+                <h2>
+
+                    Simple Fitness Tips for a Healthier Lifestyle
+
+                </h2>
+
+
+                <p>
+
+                    Building a healthy lifestyle does not require complicated
+                    routines. Small and consistent fitness habits can make a
+                    meaningful difference to your strength, stamina and overall
+                    well-being.
+
+                </p>
+
+
+                <p>
+
+                    Whether you are beginning your fitness journey or already
+                    have experience in the gym, having a structured workout
+                    routine and maintaining consistency can help you work
+                    towards your fitness goals.
+
+                </p>
+
+
+
+                <!-- FITNESS TIPS -->
+
+                <h3>
+
+                    5 Simple Fitness Tips
+
+                </h3>
+
+
+                <ul class="tips">
+
+                    <li>
+                        Warm up properly before starting your workout.
+                    </li>
+
+                    <li>
+                        Focus on correct exercise form and technique.
+                    </li>
+
+                    <li>
+                        Combine strength training with cardiovascular exercise.
+                    </li>
+
+                    <li>
+                        Stay hydrated before, during and after your workout.
+                    </li>
+
+                    <li>
+                        Give your body enough time to recover and rest.
+                    </li>
+
+                </ul>
+
+
+
+                <!-- WORKOUT SECTION -->
+
+                <h3>
+
+                    Why Regular Exercise Matters
+
+                </h3>
+
+
+                <p>
+
+                    Regular physical activity can support strength,
+                    cardiovascular fitness, mobility and general health.
+                    Consistency is one of the most important factors in
+                    building a sustainable fitness routine.
+
+                </p>
+
+
+                <p>
+
+                    A balanced approach that includes exercise, nutrition,
+                    hydration and recovery can help you maintain a healthier
+                    lifestyle over time.
+
+                </p>
+
+
+
+                <!-- JAMS FITNESS -->
+
+                <section class="jams-section">
+
+                    <h3>
+
+                        Train at JAMS Fitness Centre
+
+                    </h3>
+
+
+                    <p>
+
+                        JAMS Fitness Centre provides a fitness environment for
+                        people who want to improve their strength, fitness and
+                        overall lifestyle.
+
+                    </p>
+
+
+                    <p>
+
+                        From beginners to experienced gym members, maintaining
+                        proper exercise technique and consistent training can
+                        help you progress towards your fitness goals.
+
+                    </p>
+
+                </section>
+
+
+
+                <!-- YOUTUBE VIDEOS -->
+
+                <section class="video-section">
+
+
+                    <h3>
+
+                        Recommended Fitness Videos
+
+                    </h3>
+
+
+                    <p class="video-intro">
+
+                        Learn more about workouts, cardio, strength training
+                        and different muscle groups through these fitness
+                        videos.
+
+                    </p>
+
+
+                    <div class="video-grid">
+
+
+                        <!-- VIDEO 1 -->
+
+                        <div class="video-card">
+
+                            <div class="video">
+
+                                <iframe
+                                    src="https://www.youtube.com/embed/eMjyvIQbn9M"
+                                    title="The Best Science-Based Minimalist Workout Plan"
+                                    loading="lazy"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                                </iframe>
+
+                            </div>
+
+
+                            <h4>
+
+                                The Best Science-Based Minimalist Workout Plan
+
+                            </h4>
+
+                        </div>
+
+
+
+                        <!-- VIDEO 2 -->
+
+                        <div class="video-card">
+
+                            <div class="video">
+
+                                <iframe
+                                    src="https://www.youtube.com/embed/YvrKIQ_Tbsk"
+                                    title="Cardio vs Strength Training"
+                                    loading="lazy"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                                </iframe>
+
+                            </div>
+
+
+                            <h4>
+
+                                Cardio vs. Strength Training
+
+                            </h4>
+
+                        </div>
+
+
+
+                        <!-- VIDEO 3 -->
+
+                        <div class="video-card">
+
+                            <div class="video">
+
+                                <iframe
+                                    src="https://www.youtube.com/embed/O68MZjF8LN4"
+                                    title="Every Muscle Group Explained"
+                                    loading="lazy"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                                </iframe>
+
+                            </div>
+
+
+                            <h4>
+
+                                Every Muscle Group Explained in 8 Minutes
+
+                            </h4>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- RELATED PAGES -->
+
+                <section class="related">
+
+
+                    <h3>
+
+                        Explore JAMS Fitness Centre
+
+                    </h3>
+
+
+                    <p>
+
+                        Explore more information about JAMS Fitness Centre
+                        and our fitness services.
+
+                    </p>
+
+
+                    <div class="related-links">
+
+
+                        <a href="index.html">
+
+                            Home
+
+                        </a>
+
+
+                        <a href="fitness-centre.html">
+
+                            Fitness Centre
+
+                        </a>
+
+
+                        <a href="blog.html">
+
+                            Blog
+
+                        </a>
+
+
+                    </div>
+
+                </section>
+
+
+            </article>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="wrap">
+
+            <p>
+
+                © 2026 JAMS Fitness Centre · Sathyamangalam
+
+            </p>
+
+        </div>
+
+    </footer>
+
 
 </body>
+
 </html>
