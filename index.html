@@ -114,6 +114,22 @@
     opacity: 0.9;
     color: #ffffff;
 }
+       /* Cart scrolling fix */
+.cart-drawer {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.cart-drawer::-webkit-scrollbar {
+    width: 7px;
+}
+
+.cart-drawer::-webkit-scrollbar-thumb {
+    background: #b8bdb2;
+    border-radius: 10px;
+}
+
+</style>
   </style>
      <script type="application/ld+json">
 {
