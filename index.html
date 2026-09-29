@@ -472,15 +472,309 @@
     ]; let slideIndex=0;
     const setSlide=index=>{slideIndex=index;const slide=slides[index],hero=document.getElementById('home');hero.style.backgroundImage="linear-gradient(90deg,rgba(12,26,21,.98) 0%,rgba(12,26,21,.9) 35%,rgba(12,26,21,.28) 68%,rgba(12,26,21,.1)),url('"+slide.image+"')";document.getElementById('slide-eyebrow').textContent=slide.eyebrow;document.getElementById('slide-title').innerHTML=slide.title;document.getElementById('slide-copy').textContent=slide.copy;document.getElementById('slide-stat').textContent=slide.stat;document.querySelectorAll('.slide-dot').forEach((dot,i)=>dot.classList.toggle('active',i===index));};
     document.querySelectorAll('.slide-dot').forEach((dot,i)=>dot.addEventListener('click',()=>setSlide(i))); document.getElementById('slide-prev').addEventListener('click',()=>setSlide((slideIndex-1+slides.length)%slides.length)); document.getElementById('slide-next').addEventListener('click',()=>setSlide((slideIndex+1)%slides.length)); setInterval(()=>setSlide((slideIndex+1)%slides.length),5000);
-    let cartItems=[];
-    const updateCart=()=>{const count=cartItems.length;document.getElementById('cart-count').textContent=count+' '+(count===1?'item':'items');document.getElementById('nav-cart-count').textContent=count;document.getElementById('cart-items').innerHTML=count?cartItems.map(item=>'<li>'+item+'</li>').join(''):'<li>Your cart is empty.</li>';};
-    document.querySelectorAll('.add-product').forEach(button=>button.addEventListener('click',()=>{cartItems.push(button.dataset.product);updateCart();button.textContent='Added ✓';button.classList.add('is-selected');showNotice('cart-notice',button.dataset.product+' added to your cart.');}));
-    document.getElementById('cart-toggle').addEventListener('click',()=>document.getElementById('cart-drawer').classList.toggle('open'));
-    document.getElementById('cart-close').addEventListener('click',()=>document.getElementById('cart-drawer').classList.remove('open'));
-    document.getElementById('cart-clear').addEventListener('click',()=>{cartItems=[];updateCart();});
-    document.getElementById('checkout').addEventListener('click',()=>showNotice('cart-notice',cartItems.length ? 'Your '+cartItems.length+' item'+(cartItems.length===1?' is':'s are')+' reserved for collection at JAMS.' : 'Add an item first to reserve it at JAMS.'));
-    document.querySelectorAll('.choose-plan').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.choose-plan').forEach(b=>b.classList.remove('is-selected'));button.classList.add('is-selected');showNotice('plan-notice',button.dataset.plan+' membership selected. Add your details below to start your free week.');document.getElementById('contact').scrollIntoView({behavior:'smooth'});}));
-    document.getElementById('trial-form').addEventListener('submit',function(e){e.preventDefault();document.getElementById('form-message').textContent='Thanks! Your free trial request has been received. The JAMS team will contact you soon.';this.reset();});
+    /* =========================
+   JAMS SHOPPING CART
+   ========================= */
+
+let cartItems =
+    JSON.parse(localStorage.getItem("jamsCart")) || [];
+
+function saveCart() {
+    localStorage.setItem(
+        "jamsCart",
+        JSON.stringify(cartItems)
+    );
+}
+
+function getCartCount() {
+    return cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
+}
+
+function getCartTotal() {
+    return cartItems.reduce(
+        (total, item) =>
+            total + (item.price * item.quantity),
+        0
+    );
+}
+
+function formatPrice(price) {
+    return "₹" + price.toLocaleString("en-IN");
+}
+
+function updateCart() {
+
+    const count = getCartCount();
+    const total = getCartTotal();
+
+    document.getElementById("cart-count").textContent =
+        count + (count === 1 ? " item" : " items");
+
+    document.getElementById("nav-cart-count").textContent =
+        count;
+
+    const cartContainer =
+        document.getElementById("cart-items");
+
+    if (cartItems.length === 0) {
+
+        cartContainer.innerHTML =
+            "<p>Your cart is empty.</p>";
+
+    } else {
+
+        cartContainer.innerHTML =
+            cartItems.map((item, index) => `
+
+                <div style="
+                    padding:15px 0;
+                    border-bottom:1px solid #ddd;
+                ">
+
+                    <strong>
+                        ${item.name}
+                    </strong>
+
+                    <div style="
+                        margin-top:5px;
+                        color:#666;
+                    ">
+                        Price: ${formatPrice(item.price)}
+                    </div>
+
+                    <div style="
+                        margin-top:8px;
+                        display:flex;
+                        align-items:center;
+                        gap:8px;
+                    ">
+
+                        <button
+                            type="button"
+                            onclick="changeQuantity(${index}, -1)"
+                            style="
+                                width:32px;
+                                height:32px;
+                                border:0;
+                                cursor:pointer;
+                                background:#e6e9de;
+                                font-weight:700;
+                            ">
+                            −
+                        </button>
+
+                        <strong>
+                            Qty: ${item.quantity}
+                        </strong>
+
+                        <button
+                            type="button"
+                            onclick="changeQuantity(${index}, 1)"
+                            style="
+                                width:32px;
+                                height:32px;
+                                border:0;
+                                cursor:pointer;
+                                background:#d5f457;
+                                font-weight:700;
+                            ">
+                            +
+                        </button>
+
+                    </div>
+
+                    <div style="
+                        margin-top:8px;
+                        font-weight:700;
+                    ">
+                        Subtotal:
+                        ${formatPrice(item.price * item.quantity)}
+                    </div>
+
+                    <button
+                        type="button"
+                        onclick="removeFromCart(${index})"
+                        style="
+                            margin-top:8px;
+                            border:0;
+                            background:none;
+                            color:#fb6435;
+                            cursor:pointer;
+                            font-weight:700;
+                        ">
+                        Remove
+                    </button>
+
+                </div>
+
+            `).join("");
+    }
+
+    document.getElementById("cart-total").textContent =
+        "Total: " + formatPrice(total);
+}
+
+
+/* ADD PRODUCT */
+
+document
+    .querySelectorAll(".add-product")
+    .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const name =
+                button.dataset.product;
+
+            const price =
+                Number(button.dataset.price);
+
+            const existing =
+                cartItems.find(
+                    item => item.name === name
+                );
+
+            if (existing) {
+
+                existing.quantity++;
+
+            } else {
+
+                cartItems.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+
+            }
+
+            saveCart();
+            updateCart();
+
+            button.textContent = "Added ✓";
+            button.classList.add("is-selected");
+
+            showNotice(
+                "cart-notice",
+                name + " added to your cart."
+            );
+
+            document
+                .getElementById("cart-drawer")
+                .classList.add("open");
+
+        });
+
+    });
+
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(index, amount) {
+
+    cartItems[index].quantity += amount;
+
+    if (cartItems[index].quantity <= 0) {
+        cartItems.splice(index, 1);
+    }
+
+    saveCart();
+    updateCart();
+}
+
+
+/* REMOVE PRODUCT */
+
+function removeFromCart(index) {
+
+    cartItems.splice(index, 1);
+
+    saveCart();
+    updateCart();
+}
+
+
+/* OPEN CART */
+
+document
+    .getElementById("cart-toggle")
+    .addEventListener("click", () => {
+
+        document
+            .getElementById("cart-drawer")
+            .classList.add("open");
+
+    });
+
+
+/* CLOSE CART */
+
+document
+    .getElementById("cart-close")
+    .addEventListener("click", () => {
+
+        document
+            .getElementById("cart-drawer")
+            .classList.remove("open");
+
+    });
+
+
+/* CLEAR CART */
+
+document
+    .getElementById("cart-clear")
+    .addEventListener("click", () => {
+
+        cartItems = [];
+
+        saveCart();
+        updateCart();
+
+    });
+
+
+/* VIEW CART */
+
+document
+    .getElementById("checkout")
+    .addEventListener("click", () => {
+
+        document
+            .getElementById("cart-drawer")
+            .classList.add("open");
+
+    });
+
+
+/* PROCEED TO CHECKOUT */
+
+document
+    .getElementById("cart-checkout")
+    .addEventListener("click", () => {
+
+        if (cartItems.length === 0) {
+
+            alert(
+                "Your cart is empty. Please add a product first."
+            );
+
+            return;
+        }
+
+        alert(
+            "Checkout is ready. Payment page will open next."
+        );
+
+    });
+
+
+/* INITIAL CART LOAD */
+
+updateCart();
   </script>
   <a
   href="https://wa.me/917305712670?text=Hi%20JAMS%20Fitness%20Centre%2C%20I%27m%20interested%20in%20joining%20the%20gym."
