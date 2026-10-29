@@ -116,6 +116,31 @@
             line-height: 1.6;
         }
 
+        .order-form {
+            display: grid;
+            gap: 12px;
+            margin-top: 22px;
+            text-align: left;
+        }
+
+        .order-form label {
+            display: grid;
+            gap: 6px;
+            font-weight: 700;
+        }
+
+        .order-form input,
+        .order-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #aeb6ad;
+            font: inherit;
+        }
+
+        .order-form textarea { min-height: 80px; resize: vertical; }
+
+        .form-status { min-height: 24px; line-height: 1.5; font-weight: 700; }
+
         .btn {
             border: none;
             padding: 15px 22px;
@@ -230,18 +255,23 @@
                         on the left.
                     </p>
 
-                    <button
-                        class="btn"
-                        id="payment-completed"
-                        type="button">
-                        Payment Completed ✓
-                    </button>
+                    <form class="order-form" id="order-form" action="https://formspree.io/f/xzeevbbz" method="POST">
+                        <input type="hidden" name="form_type" value="Product order payment notification">
+                        <input type="hidden" name="order_items" id="order-items-field">
+                        <input type="hidden" name="order_total" id="order-total-field">
+                        <label>Your name<input name="name" required autocomplete="name"></label>
+                        <label>Email<input name="email" type="email" required autocomplete="email"></label>
+                        <label>Phone number<input name="phone" type="tel" required autocomplete="tel"></label>
+                        <label>Payment reference / notes<textarea name="payment_reference" required placeholder="UPI reference number after payment"></textarea></label>
+                        <button class="btn" id="payment-completed" type="submit">Send order notification ✓</button>
+                        <div class="form-status" id="order-form-status" aria-live="polite"></div>
+                    </form>
 
                     <div
                         class="success"
                         id="success-message">
 
-                        Payment confirmation received.<br><br>
+                        Your order notification has been sent to JAMS.<br><br>
 
                         Thank you for ordering from
                         <strong>JAMS Fitness Centre!</strong>
@@ -375,6 +405,15 @@
                 "Total: " +
                 formatPrice(getCartTotal());
 
+            document.getElementById("order-items-field").value =
+                cartItems.map(item =>
+                    item.name + " × " + item.quantity +
+                    " (" + formatPrice(item.price * item.quantity) + ")"
+                ).join("; ");
+
+            document.getElementById("order-total-field").value =
+                formatPrice(getCartTotal());
+
         }
 
 
@@ -383,19 +422,41 @@
            ========================= */
 
         document
-            .getElementById("payment-completed")
-            .addEventListener("click", () => {
+            .getElementById("order-form")
+            .addEventListener("submit", async event => {
 
-                if (cartItems.length === 0) {
+                event.preventDefault();
 
-                    return;
+                if (cartItems.length === 0) return;
 
+                const form = event.currentTarget;
+                const button = document.getElementById("payment-completed");
+                const status = document.getElementById("order-form-status");
+
+                status.textContent = "Sending your order notification…";
+                button.disabled = true;
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: "POST",
+                        body: new FormData(form),
+                        headers: { "Accept": "application/json" }
+                    });
+
+                    if (!response.ok) throw new Error("Unable to send");
+
+                    document
+                        .getElementById("success-message")
+                        .style.display = "block";
+
+                    status.textContent = "Please keep your payment reference until JAMS confirms the order.";
+                    localStorage.removeItem("jamsCart");
+                    cartItems = [];
+                } catch (error) {
+                    status.textContent = "We could not send the order. Please call JAMS on 7305712670.";
+                } finally {
+                    button.disabled = false;
                 }
-
-
-                document
-                    .getElementById("success-message")
-                    .style.display = "block";
 
             });
 
